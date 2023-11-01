@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="481.0" prefWidth="605.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/20.0.1">
+<AnchorPane prefHeight="481.0" prefWidth="605.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/20.0.1" fx:controller="application.login.LoginController">
    <children>
       <AnchorPane layoutX="-100.0" layoutY="-142.0" prefHeight="200.0" prefWidth="200.0" />
       <Label layoutX="130.0" layoutY="36.0" prefHeight="44.0" prefWidth="344.0" text="Welcome to LEDGER">

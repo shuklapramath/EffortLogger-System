@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="200.0" prefWidth="153.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21">
+<AnchorPane prefHeight="200.0" prefWidth="153.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/20.0.1" fx:controller="application.newlog.NewLogController">
    <children>
       <AnchorPane prefHeight="491.0" prefWidth="397.0">
          <children>

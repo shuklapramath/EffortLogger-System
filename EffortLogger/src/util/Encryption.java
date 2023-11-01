@@ -1,14 +1,7 @@
 package util;
 
-import java.util.Scanner;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Random;
 import java.lang.StringBuilder;
-import java.util.Date;
 
 /**
  * The CaesarCipher class implements a basic Caesar cipher algorithm for encryption and decryption.
@@ -39,7 +32,6 @@ public class Encryption {
 			encryptedContent.append(c);
 		}
 		
-		System.out.println(encryptedContent.toString()); // For testing purposes
 		return encryptedContent.toString();
 	}
 	
@@ -61,7 +53,6 @@ public class Encryption {
 			decryptedContent.append(c);
 		}
 		
-		System.out.println(decryptedContent.toString()); // For testing purposes
 		return decryptedContent.toString();
 	}
 	
@@ -73,14 +64,11 @@ public class Encryption {
 		Random random = new Random();
 		
 		token = random.nextInt(26) + 1;
-		System.out.println(token); // For testing purposes
 		
 		return token;
 	}
 
 	public static void main(String[] args) {
-//		Database.get("Sun Oct 29 21:04:22 MST 2023");
-		Database.save("9:00:00,1:00:00,4 hours,utility,other");
 		
 	}
 
