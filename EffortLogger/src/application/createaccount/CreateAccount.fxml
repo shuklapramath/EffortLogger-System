@@ -38,10 +38,10 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField layoutX="164.0" layoutY="187.0" prefHeight="26.0" prefWidth="312.0" promptText="Username" />
-            <TextField layoutX="164.0" layoutY="254.0" prefHeight="26.0" prefWidth="312.0" promptText="Password" />
-            <TextField layoutX="160.0" layoutY="325.0" prefHeight="26.0" prefWidth="312.0" promptText="Confirm Password" />
-            <Button layoutX="245.0" layoutY="371.0" mnemonicParsing="false" text="Create Account">
+            <TextField fx:id="usernameTextField" layoutX="164.0" layoutY="187.0" prefHeight="26.0" prefWidth="312.0" promptText="Username" />
+            <TextField fx:id="passwordTextField" layoutX="164.0" layoutY="254.0" prefHeight="26.0" prefWidth="312.0" promptText="Password" />
+            <TextField fx:id="confirmPasswordTextField" layoutX="160.0" layoutY="325.0" prefHeight="26.0" prefWidth="312.0" promptText="Confirm Password" />
+            <Button layoutX="245.0" layoutY="371.0" mnemonicParsing="false" text="Create Account" onAction="#createAccount">
                <font>
                   <Font size="18.0" />
                </font>

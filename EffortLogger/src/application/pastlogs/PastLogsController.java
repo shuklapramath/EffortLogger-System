@@ -29,7 +29,7 @@ public class PastLogsController {
     private void viewLog() {
         String selectedLog = cbLogs.getValue();
         if (selectedLog != null && !selectedLog.isEmpty()) {
-            String[] logDetails = Database.get(selectedLog).split(",");
+            String[] logDetails = Database.getLog(selectedLog).split(",");
 
             lblStartTime.setText("Start Time: " + logDetails[0]);
             lblStopTime.setText("Stop Time: " + logDetails[1]);

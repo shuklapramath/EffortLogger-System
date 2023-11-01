@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Database {
 	
-	public static void save(String content) {
+	public static void saveLog(String content) {
 		/**
 		 * Saves the encrypted message and token (shift value) to the database. If the database does not exist, it is created.
 		 * The Date class is being used for testing purposes only. A serial value will take its place once a proper database is implemented.
@@ -34,10 +34,9 @@ public class Database {
 			e.printStackTrace();
 		}
 		
-		
 	}
 	
-	public static String get(String entryId) {
+	public static String getLog(String entryId) {
 		/**
 		 * Reads from the database line by line until the entryId finds a match. If a match is found, return decrypted content. Otherwise, return null.
 		 */
@@ -83,9 +82,26 @@ public class Database {
 
 	    return dates;
 	}
+	
+	public static void saveAccount(String username, String password) {
+		String database = "src/database/accounts.txt";
+		int token = Encryption.generateToken();
+		
+		try {
+			FileWriter fileWriter = new FileWriter(database, true);
+			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+			
+			bufferedWriter.write(username + "," + Encryption.encrypt(password, token) + "," + Integer.toString(token));
+			bufferedWriter.newLine();
+            bufferedWriter.close();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
 
 	public static void main(String[] args) {
-	
 
 	}
 
