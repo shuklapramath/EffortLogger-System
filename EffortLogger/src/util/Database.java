@@ -100,6 +100,29 @@ public class Database {
 		}
 		
 	}
+	
+	public static String getUsername(String entry) {
+		String database = "src/database/accounts.txt";
+		
+		try (BufferedReader br = new BufferedReader(new FileReader(database))) {
+            String line;
+            
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(",", 3);
+                String username = parts[0].toLowerCase();
+
+                if (username.equals(entry.toLowerCase())) {
+                        return entry;
+                }
+            }
+            
+        } 
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+	}
 
 	public static void main(String[] args) {
 

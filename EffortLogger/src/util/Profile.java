@@ -1,20 +1,20 @@
 package util;
 
-public class UserAndPw {
+public class Profile {
 	
-	private String userName;
+	private String username;
 	private String password;
 	
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
 	public void setPassword(String password) {
 		this.password = password;
 	}
 	
-	public String getuserName() {
-		return this.userName;
+	public String getUsername() {
+		return this.username;
 	}
 	
 	public String getPassword() {

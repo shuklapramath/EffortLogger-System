@@ -5,19 +5,24 @@ import application.newlog.NewLog;
 import application.pastlogs.PastLogs;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import util.Profile;
 
 public class DashboardController {
 	@FXML private Button newLogButton;
 	@FXML private Button pastLogsButton;
 	@FXML private Button logOutButton;
+	@FXML private Label header;
 
 	@FXML
     private void initialize() {
+		// Call Profile instance from Login class
     	setupNewLogButton();
     	setupPastLogsButton();
-    	logOutButton();
-    	// call functions here
+    	setupLogOutButton();
+    	
+    	// Update header if username is not null
     }
     
     @FXML
@@ -37,7 +42,7 @@ public class DashboardController {
     }
     
     @FXML
-    private void logOutButton() {
+    private void setupLogOutButton() {
     	logOutButton.setOnAction(event -> {
             Login login = new Login();
             login.show((Stage) logOutButton.getScene().getWindow());
