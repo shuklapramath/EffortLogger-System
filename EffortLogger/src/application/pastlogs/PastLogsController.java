@@ -1,9 +1,10 @@
 package application.pastlogs;
 
 import application.dashboard.Dashboard;
+import application.editlog.EditLog;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import util.Database;
@@ -11,7 +12,8 @@ import java.util.List;
 
 public class PastLogsController {
 	@FXML private Button dashboardButton;
-    @FXML private ComboBox<String> cbLogs;
+	@FXML private Button editButton;
+    @FXML private ChoiceBox<String> cbLogs;
     @FXML private Label lblStartTime;
     @FXML private Label lblStopTime;
     @FXML private Label lblTotalTime;
@@ -21,8 +23,10 @@ public class PastLogsController {
     @FXML
     public void initialize() {
         List<String> names = Database.getAllNames();
+        
         cbLogs.getItems().addAll(names);
         setupDashboardButton();
+        setupEditButton();
     }
 
     @FXML
@@ -44,6 +48,14 @@ public class PastLogsController {
     	dashboardButton.setOnAction(event -> {
             Dashboard dashboard = new Dashboard();
             dashboard.show((Stage) dashboardButton.getScene().getWindow());
+        });
+    }
+    
+    @FXML
+    private void setupEditButton() {
+    	editButton.setOnAction(event -> {
+            EditLog editLog = new EditLog();
+            editLog.show((Stage) editButton.getScene().getWindow());
         });
     }
 }
