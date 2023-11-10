@@ -20,8 +20,8 @@ public class PastLogsController {
 
     @FXML
     public void initialize() {
-        List<String> dates = Database.getAllDates();
-        cbLogs.getItems().addAll(dates);
+        List<String> names = Database.getAllNames();
+        cbLogs.getItems().addAll(names);
         setupDashboardButton();
     }
 
