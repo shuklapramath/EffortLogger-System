@@ -94,6 +94,7 @@ public class Database {
 	        while ((line = br.readLine()) != null) {
 	            String[] parts = line.split(",");
 	            Integer score = Integer.parseInt(parts[7]);
+	            // TODO: add scores from relevant category only
 	            scores.add(score);
 	        }
 	    } catch (IOException e) {
