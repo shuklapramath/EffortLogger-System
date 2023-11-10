@@ -1,6 +1,7 @@
 package application.createaccount;
 
 import application.login.Login;
+import dataclass.Account;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -29,6 +30,7 @@ public class CreateAccountController {
     
     @FXML
     private void createAccount() {
+    	Account account = new Account();
     	String username = usernameTextField.getText();
     	String password = passwordTextField.getText();
     	String confirmPassword = confirmPasswordTextField.getText();
@@ -42,7 +44,9 @@ public class CreateAccountController {
     		!confirmPassword.isEmpty() && 
     		password.equals(confirmPassword)) {
     		
-    		Database.saveAccount(username, password);
+    		account.setUsername(username);
+    		account.setPassword(password);
+    		Database.saveAccount(account);
     		
     		usernameTextField.setText("");
     		passwordTextField.setText("");
