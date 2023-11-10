@@ -6,27 +6,26 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+
+import dataclass.Log;
+import dataclass.Account;
 
 public class Database {
 	
-	public static void saveLog(String content) {
-		/**
-		 * Saves the encrypted message and token (shift value) to the database. If the database does not exist, it is created.
-		 * The Date class is being used for testing purposes only. A serial value will take its place once a proper database is implemented.
-		 * Each entry is in the format Date,content,token. These elements are delimited by commas to facilitate easy parsing or extraction 
-		 * of the individual components when needed.
-		 */
+	public static void saveLog(Log log) {
+
 		String database = "src/database/logs.txt";
-		Date date = new Date();
 		int token = Encryption.generateToken();
+		String content = log.getDate() + "," + log.getStatus() + "," + log.getStartTime() + "," + 
+						 log.getEndTime() + "," + log.getProjectName() + "," + log.getCategory() + "," + 
+						 Integer.toString(log.getStoryPoints());
 		
 		try {
 			FileWriter fileWriter = new FileWriter(database, true);
 			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 			
-			bufferedWriter.write(date + "," + Encryption.encrypt(content, token) + "," + Integer.toString(token));
+			bufferedWriter.write(log.getName() + "," + Encryption.encrypt(content, token) + "," + Integer.toString(token));
 			bufferedWriter.newLine();
             bufferedWriter.close();
 		}
@@ -36,22 +35,23 @@ public class Database {
 		
 	}
 	
-	public static String getLog(String entryId) {
-		/**
-		 * Reads from the database line by line until the entryId finds a match. If a match is found, return decrypted content. Otherwise, return null.
-		 */
+	public static String getLog(String nameId) {
+
 		String database = "src/database/logs.txt";
 		
         try (BufferedReader br = new BufferedReader(new FileReader(database))) {
             String line;
             
             while ((line = br.readLine()) != null) {
-                String[] parts = line.split(",", 7);
-                String dateStr = parts[0];
-                String content = parts[1] + "," + parts[2] + "," + parts[3] + "," + parts[4] + "," + parts[5];
+                String[] parts = line.split(",");
+                String name = parts[0];
+                int token = Integer.parseInt(parts[parts.length - 1]);
+                String content = parts[1] + "," + parts[2] + "," + parts[3] + "," + 
+                				 parts[4] + "," + parts[5] + "," + parts[6] + "," + 
+                				 parts[7];
 
-                if (dateStr.equals(entryId)) {
-                        return Encryption.decrypt(content, Integer.parseInt(parts[6]));
+                if (name.equals(nameId)) {
+                        return Encryption.decrypt(content, token);
                 }
             }
             
@@ -63,8 +63,8 @@ public class Database {
         return null;
 	}
 	
-	public static List<String> getAllDates() {
-	    List<String> dates = new ArrayList<>();
+	public static List<String> getAllNames() {
+	    List<String> names = new ArrayList<>();
 
 	    String database = "src/database/logs.txt";
 
@@ -72,18 +72,38 @@ public class Database {
 	        String line;
 
 	        while ((line = br.readLine()) != null) {
-	            String[] parts = line.split(",", 7);
-	            String dateStr = parts[0];
-	            dates.add(dateStr);
+	            String[] parts = line.split(",");
+	            String name = parts[0];
+	            names.add(name);
 	        }
 	    } catch (IOException e) {
 	        e.printStackTrace();
 	    }
 
-	    return dates;
+	    return names;
 	}
 	
-	public static void saveAccount(String username, String password) {
+	public static List<Integer> getCategoryScores() {
+	    List<Integer> scores = new ArrayList<>();
+
+	    String database = "src/database/logs.txt";
+
+	    try (BufferedReader br = new BufferedReader(new FileReader(database))) {
+	        String line;
+
+	        while ((line = br.readLine()) != null) {
+	            String[] parts = line.split(",");
+	            Integer score = Integer.parseInt(parts[7]);
+	            scores.add(score);
+	        }
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+
+	    return scores;
+	}
+	
+	public static void saveAccount(Account account) {
 		String database = "src/database/accounts.txt";
 		int token = Encryption.generateToken();
 		
@@ -91,7 +111,7 @@ public class Database {
 			FileWriter fileWriter = new FileWriter(database, true);
 			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 			
-			bufferedWriter.write(username + "," + Encryption.encrypt(password, token) + "," + Integer.toString(token));
+			bufferedWriter.write(account.getUsername() + "," + Encryption.encrypt(account.getPassword(), token) + "," + Integer.toString(token));
 			bufferedWriter.newLine();
             bufferedWriter.close();
 		}
@@ -101,18 +121,18 @@ public class Database {
 		
 	}
 	
-	public static String getUsername(String entry) {
+	public static String getUsername(String accountId) {
 		String database = "src/database/accounts.txt";
 		
 		try (BufferedReader br = new BufferedReader(new FileReader(database))) {
             String line;
             
             while ((line = br.readLine()) != null) {
-                String[] parts = line.split(",", 3);
+                String[] parts = line.split(",");
                 String username = parts[0].toLowerCase();
 
-                if (username.equals(entry.toLowerCase())) {
-                        return entry;
+                if (username.equals(accountId.toLowerCase())) {
+                        return accountId;
                 }
             }
             

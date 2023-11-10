@@ -20,9 +20,10 @@ public class Encryption {
 		 * The encrypted content and token are saved to the database by calling the save function.
 		 */
 		StringBuilder encryptedContent = new StringBuilder();
+		String lowercaseContent = content.toLowerCase();
 				
 		for (int i = 0; i < content.length(); i++) {
-			char c = content.charAt(i);
+			char c = lowercaseContent.charAt(i);
 			
 			if (Character.isLetter(c)) {
 				// The encryption formula
