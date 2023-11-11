@@ -15,7 +15,8 @@ public class Database {
 	
 	public static void saveLog(Log log) {
 
-		String database = "../src/database/logs.txt";
+		String database = "src/database/logs.txt";
+
 		int token = Encryption.generateToken();
 		String content = log.getDate() + "," + log.getStatus() + "," + log.getStartTime() + "," + 
 						 log.getEndTime() + "," + log.getProjectName() + "," + log.getCategory() + "," + 
@@ -144,6 +145,35 @@ public class Database {
 
         return null;
 	}
+	
+	public static boolean usernameExists(String username) {
+        String filteredUsername = InputFilter.filterSpecialCharacters(username);
+
+        if (filteredUsername == null) {
+            System.out.println("Invalid input for username.");
+            return false;
+        }
+
+        String database = "src/database/accounts.txt";
+
+        try (BufferedReader br = new BufferedReader(new FileReader(database))) {
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(",");
+                String existingUsername = InputFilter.filterSpecialCharacters(parts[0]);
+
+                if (existingUsername != null && existingUsername.equals(filteredUsername)) {
+                    return true;
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
 
 	public static void main(String[] args) {
 
