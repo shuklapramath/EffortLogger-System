@@ -28,8 +28,8 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <TextField fx:id="usernameTextField" layoutX="178.0" layoutY="380.0" prefHeight="25.0" prefWidth="327.0" />
-      <TextField fx:id="passwordTextField" layoutX="178.0" layoutY="429.0" prefHeight="25.0" prefWidth="327.0" />
+      <TextField fx:id="usernameTextField" layoutX="164.0" layoutY="770.0" prefHeight="25.0" prefWidth="224.0" />
+      <TextField fx:id="passwordTextField" layoutX="164.0" layoutY="770.0" prefHeight="25.0" prefWidth="224.0" />
       <Button fx:id="loginButton" layoutX="416.0" layoutY="770.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="86.0" text="Sign In">
          <font>
             <Font size="18.0" />
