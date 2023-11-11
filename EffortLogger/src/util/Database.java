@@ -15,7 +15,7 @@ public class Database {
 	
 	public static void saveLog(Log log) {
 
-		String database = "src/database/logs.txt";
+		String database = "../src/database/logs.txt";
 		int token = Encryption.generateToken();
 		String content = log.getDate() + "," + log.getStatus() + "," + log.getStartTime() + "," + 
 						 log.getEndTime() + "," + log.getProjectName() + "," + log.getCategory() + "," + 
