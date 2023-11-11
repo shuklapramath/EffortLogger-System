@@ -67,7 +67,7 @@ public class Database {
 	public static List<String> getAllNames() {
 	    List<String> names = new ArrayList<>();
 
-	    String database = "src/database/logs.txt";
+	    String database = "Effortlogger/src/database/logs.txt";
 
 	    try (BufferedReader br = new BufferedReader(new FileReader(database))) {
 	        String line;
@@ -106,7 +106,7 @@ public class Database {
 	}
 	
 	public static void saveAccount(Account account) {
-		String database = "src/database/accounts.txt";
+		String database = "Effortlogger/src/database/accounts.txt";
 		int token = Encryption.generateToken();
 		
 		try {
@@ -123,27 +123,31 @@ public class Database {
 		
 	}
 	
-	public static String getUsername(String accountId) {
-		String database = "src/database/accounts.txt";
+	
+	public static boolean searchUsernameAndValidate(String searchUsername, String checkPassword) {
+		String database = "Effortlogger/src/database/accounts.txt";
 		
 		try (BufferedReader br = new BufferedReader(new FileReader(database))) {
             String line;
             
             while ((line = br.readLine()) != null) {
+            	
                 String[] parts = line.split(",");
-                String username = parts[0].toLowerCase();
-
-                if (username.equals(accountId.toLowerCase())) {
-                        return accountId;
-                }
+                String username = parts[0];
+                String password = parts[1];
+                
+                int token = Integer.parseInt(parts[2]);
+                password = Encryption.decrypt(password, token);
+                
+                if(username.equals(searchUsername) && password.equals(checkPassword)) {
+                	return true;
+                } 
             }
-            
         } 
         catch (IOException e) {
             e.printStackTrace();
         }
-
-        return null;
+        return false;
 	}
 	
 	public static boolean usernameExists(String username) {
@@ -175,6 +179,7 @@ public class Database {
         return false;
     }
 
+	
 	public static void main(String[] args) {
 
 	}
