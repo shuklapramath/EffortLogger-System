@@ -3,11 +3,10 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane prefHeight="960.0" prefWidth="540.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.createaccount.CreateAccountController">
    <children>
@@ -21,18 +20,18 @@
       </Label>
       <Label layoutX="50.0" layoutY="667.0" text="Username">
          <font>
-            <Font size="24.0" />
+            <Font size="18.0" />
          </font>
       </Label>
       <Label layoutX="50.0" layoutY="717.0" text="Password">
          <font>
-            <Font size="24.0" />
+            <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="usernameTextField" layoutX="164.0" layoutY="669.0" prefHeight="25.0" prefWidth="327.0" />
-      <TextField fx:id="passwordTextField" layoutX="164.0" layoutY="719.0" prefHeight="25.0" prefWidth="327.0" />
-      <TextField fx:id="confirmPasswordTextField" layoutX="247.0" layoutY="769.0" prefHeight="25.0" prefWidth="244.0" />
-      <Button onAction="#createAccount" layoutX="199.0" layoutY="816.0" mnemonicParsing="false" text="Create Account">
+      <TextField fx:id="usernameTextField" layoutX="213.0" layoutY="666.0" prefHeight="25.0" prefWidth="278.0" />
+      <TextField fx:id="passwordTextField" layoutX="213.0" layoutY="716.0" prefHeight="25.0" prefWidth="278.0" />
+      <TextField fx:id="confirmPasswordTextField" layoutX="213.0" layoutY="766.0" prefHeight="25.0" prefWidth="278.0" />
+      <Button layoutX="51.0" layoutY="816.0" mnemonicParsing="false" onAction="#createAccount" prefHeight="35.0" prefWidth="440.0" text="Create Account">
          <font>
             <Font size="18.0" />
          </font>
@@ -49,7 +48,7 @@
       </Label>
       <Label layoutX="50.0" layoutY="767.0" text="Confirm Password">
          <font>
-            <Font size="24.0" />
+            <Font size="18.0" />
          </font>
       </Label>
    </children>

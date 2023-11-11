@@ -1,5 +1,6 @@
 package application.dashboard;
 
+import application.definitions.Definitions;
 import application.login.Login;
 import application.newlog.NewLog;
 import application.pastlogs.PastLogs;
@@ -13,6 +14,7 @@ public class DashboardController {
 	@FXML private Button pastLogsButton;
 	@FXML private Button logOutButton;
 	@FXML private Label header;
+	@FXML private Button definitionsButton;
 
 	@FXML
     private void initialize() {
@@ -20,6 +22,7 @@ public class DashboardController {
     	setupNewLogButton();
     	setupPastLogsButton();
     	setupLogOutButton();
+    	setupDefinitionsButton();
     	
     	// Update header if username is not null
     }
@@ -48,5 +51,11 @@ public class DashboardController {
         });
     }
     
-    // create additional functionality
+    @FXML
+    private void setupDefinitionsButton() {
+    	definitionsButton.setOnAction(event -> {
+            Definitions definitions = new Definitions();
+            definitions.show((Stage) definitionsButton.getScene().getWindow());
+        });
+    }
 }
