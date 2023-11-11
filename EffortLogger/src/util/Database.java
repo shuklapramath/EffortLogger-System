@@ -15,7 +15,8 @@ public class Database {
 	
 	public static void saveLog(Log log) {
 
-		String database = "EffortLogger/src/database/logs.txt";
+		String database = "src/database/logs.txt";
+
 		int token = Encryption.generateToken();
 		String content = log.getDate() + "," + log.getStatus() + "," + log.getStartTime() + "," + 
 						 log.getEndTime() + "," + log.getProjectName() + "," + log.getCategory() + "," + 
@@ -37,7 +38,7 @@ public class Database {
 	
 	public static String getLog(String nameId) {
 
-		String database = "EffortLogger/src/database/logs.txt";
+		String database = "src/database/logs.txt";
 		
         try (BufferedReader br = new BufferedReader(new FileReader(database))) {
             String line;
@@ -66,7 +67,7 @@ public class Database {
 	public static List<String> getAllNames() {
 	    List<String> names = new ArrayList<>();
 
-	    String database = "EffortLogger/src/database/logs.txt";
+	    String database = "src/database/logs.txt";
 
 	    try (BufferedReader br = new BufferedReader(new FileReader(database))) {
 	        String line;
@@ -86,7 +87,7 @@ public class Database {
 	public static List<Integer> getCategoryScores() {
 	    List<Integer> scores = new ArrayList<>();
 
-	    String database = "EffortLogger/src/database/logs.txt";
+	    String database = "src/database/logs.txt";
 
 	    try (BufferedReader br = new BufferedReader(new FileReader(database))) {
 	        String line;
@@ -105,7 +106,7 @@ public class Database {
 	}
 	
 	public static void saveAccount(Account account) {
-		String database = "EffortLogger/src/database/accounts.txt";
+		String database = "src/database/accounts.txt";
 		int token = Encryption.generateToken();
 		
 		try {
@@ -123,7 +124,7 @@ public class Database {
 	}
 	
 	public static String getUsername(String accountId) {
-		String database = "EffortLogger/src/database/accounts.txt";
+		String database = "src/database/accounts.txt";
 		
 		try (BufferedReader br = new BufferedReader(new FileReader(database))) {
             String line;
@@ -153,7 +154,7 @@ public class Database {
             return false;
         }
 
-        String database = "EffortLogger/src/database/accounts.txt";
+        String database = "src/database/accounts.txt";
 
         try (BufferedReader br = new BufferedReader(new FileReader(database))) {
             String line;

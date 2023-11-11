@@ -44,17 +44,17 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="113.0" layoutY="583.0" text="Project Name">
+      <Label layoutX="113.0" layoutY="583.0" text="Lifecycle Step">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="113.0" layoutY="643.0" text="Category">
+      <Label layoutX="112.0" layoutY="703.0" text="Category">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="113.0" layoutY="703.0" text="Story Points">
+      <Label layoutX="112.0" layoutY="763.0" text="Story Points">
          <font>
             <Font size="18.0" />
          </font>
@@ -89,12 +89,22 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="236.0" layoutY="643.0" prefHeight="23.0" prefWidth="194.0">
+      <Label layoutX="236.0" layoutY="703.0" prefHeight="23.0" prefWidth="194.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="236.0" layoutY="703.0" prefHeight="23.0" prefWidth="194.0">
+      <Label layoutX="236.0" layoutY="763.0" prefHeight="23.0" prefWidth="194.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="113.0" layoutY="643.0" text="Project Name">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="236.0" layoutY="643.0" prefHeight="23.0" prefWidth="194.0">
          <font>
             <Font size="18.0" />
          </font>
