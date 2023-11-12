@@ -45,11 +45,22 @@ public class CreateAccountController {
     	if(password.length() < 8)
     	{
     		InputValidator.showAlert("Invalid Input", "Length of password should be greater than 8 characters.");
+    		return;
     	}
         
-     // Check for empty or invalid inputs
-        if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || !password.equals(confirmPassword)) {
+    	// Check for empty or invalid inputs
+        if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
         	InputValidator.showAlert("Invalid Input", "Please check your input.");
+            return;
+        }
+        
+        if (username.equals(password)) {
+        	InputValidator.showAlert("Invalid Input", "Username and Password cannot be similar");
+            return;
+        }
+        
+        if (!password.equals(confirmPassword)) {
+        	InputValidator.showAlert("Invalid Input", "Password and Confirm Password are not similar.");
             return;
         }
         
@@ -58,13 +69,15 @@ public class CreateAccountController {
             return;
         }
     	    		
-    		account.setUsername(username);
-    		account.setPassword(password);
-    		Database.saveAccount(account);
+    	account.setUsername(username);
+    	account.setPassword(password);
+    	Database.saveAccount(account);
+    	
+    	InputValidator.showSuccess("Success", "Account created successfully!");
     		
-    		usernameTextField.setText("");
-    		passwordTextField.setText("");
-    		confirmPasswordTextField.setText("");
+    	usernameTextField.setText("");
+    	passwordTextField.setText("");
+    	confirmPasswordTextField.setText("");
     }
     
     public class InputValidator {
@@ -74,7 +87,7 @@ public class CreateAccountController {
                 return false; // return empty string for null input
             }
 
-            // Check for allowed characters, prompt for new input if other characters are detected
+            // Checking for allowed characters, prompt for new input if other characters are detected
             if (!input.matches("[@_a-zA-Z0-9 ]*")) {
                 
                 return true;
@@ -85,6 +98,14 @@ public class CreateAccountController {
 
         private static void showAlert(String title, String content) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle(title);
+            alert.setHeaderText(null);
+            alert.setContentText(content);
+            alert.showAndWait();
+        }
+        
+        private static void showSuccess(String title, String content) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle(title);
             alert.setHeaderText(null);
             alert.setContentText(content);
