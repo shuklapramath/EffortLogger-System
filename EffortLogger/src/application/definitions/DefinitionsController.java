@@ -9,10 +9,11 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class DefinitionsController {
     @FXML private Button dashboardButton;
@@ -35,7 +36,7 @@ public class DefinitionsController {
     }
 
     private void populateTypeChoiceBox() {
-        typeChoiceBox.getItems().addAll("Lifecycle Setup", "Project Name");
+        typeChoiceBox.getItems().addAll("Lifecycle Step", "Project Name");
     }
 
     private void setupSaveButton() {
@@ -51,6 +52,7 @@ public class DefinitionsController {
         String relativePath = "src/database/Definitions.txt";
         File file = new File(relativePath);
 
+        // Check if the file exists, and create it if it doesn't
         if (!file.exists()) {
             try {
                 file.createNewFile();
@@ -60,9 +62,30 @@ public class DefinitionsController {
             }
         }
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
-            writer.write(selectedType + ": " + name);
-            writer.newLine();
+        // Read the file and build a map of types and their corresponding names
+        Map<String, Set<String>> typeMap = new HashMap<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(": ");
+                if (parts.length == 2) {
+                    typeMap.computeIfAbsent(parts[0], k -> new HashSet<>()).add(parts[1]);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        // Add the new name to the map
+        typeMap.computeIfAbsent(selectedType, k -> new HashSet<>()).add(name);
+
+        // Write the updated map back to the file
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+            for (Map.Entry<String, Set<String>> entry : typeMap.entrySet()) {
+                writer.write(entry.getKey() + ": " + String.join(",", entry.getValue()));
+                writer.newLine();
+            }
 
             // Show the alert after successful save
             Alert alert = new Alert(AlertType.INFORMATION);
@@ -70,6 +93,7 @@ public class DefinitionsController {
             alert.setHeaderText(null);
             alert.setContentText("Saved Successfully");
             alert.showAndWait();
+
         } catch (IOException e) {
             e.printStackTrace(); // Handle exceptions appropriately
         }
