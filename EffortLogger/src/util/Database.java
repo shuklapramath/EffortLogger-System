@@ -67,7 +67,7 @@ public class Database {
 	public static List<String> getAllNames() {
 	    List<String> names = new ArrayList<>();
 
-	    String database = "Effortlogger/src/database/logs.txt";
+	    String database = "src/database/logs.txt";
 
 	    try (BufferedReader br = new BufferedReader(new FileReader(database))) {
 	        String line;
@@ -106,7 +106,7 @@ public class Database {
 	}
 	
 	public static void saveAccount(Account account) {
-		String database = "Effortlogger/src/database/accounts.txt";
+		String database = "src/database/accounts.txt";
 		int token = Encryption.generateToken();
 		
 		try {
@@ -125,7 +125,7 @@ public class Database {
 	
 	
 	public static boolean searchUsernameAndValidate(String searchUsername, String checkPassword) {
-		String database = "Effortlogger/src/database/accounts.txt";
+		String database = "src/database/accounts.txt";
 		
 		try (BufferedReader br = new BufferedReader(new FileReader(database))) {
             String line;
