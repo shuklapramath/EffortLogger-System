@@ -14,19 +14,23 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.Arrays;
 
 public class DefinitionsController {
     @FXML private Button dashboardButton;
     @FXML private ChoiceBox<String> typeChoiceBox;
-    @FXML private TextField nameTextField; // Reference to the TextField
-    @FXML private Button saveButton; // Reference to the Save button
+    @FXML private TextField nameTextField;
+    @FXML private Button saveButton;
+    @FXML private Button deleteButton;
 
     @FXML
     private void initialize() {
         setupDashboardButton();
         populateTypeChoiceBox();
-        setupSaveButton(); // Setup the Save button
+        setupSaveButton();
+        setupDeleteButton();
     }
+
 
     private void setupDashboardButton() {
         dashboardButton.setOnAction(event -> {
@@ -45,6 +49,68 @@ public class DefinitionsController {
         });
     }
 
+    private void setupDeleteButton() {
+        deleteButton.setOnAction(event -> {
+            deleteFromDefinitionsFile();
+        });
+    }
+
+    
+    
+    
+    private void deleteFromDefinitionsFile() {
+        String selectedType = typeChoiceBox.getValue();
+        String name = nameTextField.getText().trim();
+
+        String relativePath = "src/database/Definitions.txt";
+        File file = new File(relativePath);
+
+        Map<String, Set<String>> typeMap = new HashMap<>();
+        boolean isDeleted = false;
+
+        // Read the file and build the map
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(": ");
+                if (parts.length == 2) {
+                    Set<String> names = new HashSet<>(Arrays.asList(parts[1].split(",")));
+                    typeMap.put(parts[0].trim(), names);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        // Check if the name exists and remove it
+        if (typeMap.containsKey(selectedType) && typeMap.get(selectedType).remove(name)) {
+            isDeleted = true;
+        }
+
+        // Write the updated map back to the file
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+            for (Map.Entry<String, Set<String>> entry : typeMap.entrySet()) {
+                writer.write(entry.getKey() + ": " + String.join(",", entry.getValue()));
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Alert the user
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Deletion Status");
+        alert.setHeaderText(null);
+        if (isDeleted) {
+            alert.setContentText("Deleted Successfully");
+        } else {
+            alert.setContentText("Item not found");
+        }
+        alert.showAndWait();
+    }
+
+
     private void saveToDefinitionsFile() {
         String selectedType = typeChoiceBox.getValue();
         String name = nameTextField.getText();
@@ -61,6 +127,8 @@ public class DefinitionsController {
                 return;
             }
         }
+        
+     
 
         // Read the file and build a map of types and their corresponding names
         Map<String, Set<String>> typeMap = new HashMap<>();
@@ -98,4 +166,6 @@ public class DefinitionsController {
             e.printStackTrace(); // Handle exceptions appropriately
         }
     }
+    
+    
 }
