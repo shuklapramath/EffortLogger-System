@@ -49,6 +49,7 @@ public class DefinitionsController {
         });
     }
 
+    // TODO: Separate database and controller functionality, and move database functionality to Database class
     private void setupDeleteButton() {
         deleteButton.setOnAction(event -> {
             deleteFromDefinitionsFile();
@@ -110,12 +111,11 @@ public class DefinitionsController {
         alert.showAndWait();
     }
 
-
     private void saveToDefinitionsFile() {
         String selectedType = typeChoiceBox.getValue();
         String name = nameTextField.getText();
 
-        String relativePath = "src/database/Definitions.txt";
+        String relativePath = "src/database/definitions.txt";
         File file = new File(relativePath);
 
         // Check if the file exists, and create it if it doesn't
