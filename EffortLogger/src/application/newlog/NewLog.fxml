@@ -45,7 +45,7 @@
       <ChoiceBox fx:id="category" layoutX="234.0" layoutY="670.0" prefHeight="35.0" prefWidth="194.0" />
       <Label layoutX="114.0" layoutY="436.0" text="Start Time">
          <font>
-            <Font size="18.01" />
+            <Font size="18.0" />
          </font>
       </Label>
       <Label layoutX="114.0" layoutY="496.0" text="End Time">

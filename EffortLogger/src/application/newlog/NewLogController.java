@@ -136,7 +136,7 @@ public class NewLogController<Strings> implements Initializable{
         });
     }
 
-///Users/pranavzagade/Downloads/EffortLogger/EffortLogger/
+////Users/pranavzagade/Downloads/EffortLogger/EffortLogger/
   	
   	 @SuppressWarnings("unchecked")
   	private void readDefinitionsFile() {
