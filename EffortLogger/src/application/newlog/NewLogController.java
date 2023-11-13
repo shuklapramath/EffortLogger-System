@@ -88,7 +88,7 @@ public class NewLogController<Strings> implements Initializable{
    
     public static int generateRandomNumber() {
         Random random = new Random();
-        return random.nextInt(5); // Generates a random number between 0 (inclusive) and 5 (exclusive)
+        return random.nextInt(5); // Generates a random number between 0 (inclusive) and 5
     }
     
   	@SuppressWarnings("unchecked")
@@ -136,11 +136,11 @@ public class NewLogController<Strings> implements Initializable{
         });
     }
 
-	
+///Users/pranavzagade/Downloads/EffortLogger/EffortLogger/
   	
   	 @SuppressWarnings("unchecked")
   	private void readDefinitionsFile() {
-         Path filePath = Paths.get("/Users/pranavzagade/Downloads/EffortLogger/EffortLogger/src/database/Definitions.txt");
+         Path filePath = Paths.get("src/database/Definitions.txt");
 
          try (BufferedReader reader = new BufferedReader(new FileReader(filePath.toFile()))) {
              String line;
@@ -202,7 +202,7 @@ public class NewLogController<Strings> implements Initializable{
                 generateHexId(), logNameText, dateText, statusText, startTimeText, endTimeText, lifeCycleStepText, projectNameText, categoryText, storyPointsText);
         
         try {
-            Path filePath1 = Paths.get("/Users/pranavzagade/Downloads/EffortLogger/EffortLogger/src/database/logs.txt");
+            Path filePath1 = Paths.get("src/database/logs.txt");
             FileWriter fileWriter = new FileWriter(filePath1.toFile(), true); // Append mode
             fileWriter.write(logEntry);
             fileWriter.close();
