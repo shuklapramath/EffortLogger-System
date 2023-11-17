@@ -205,15 +205,6 @@ public class EditLogController<Strings> implements Initializable{
 	            return part.trim().substring(6); // Extract Logid value
 	        }
 	    }
-	    return null; // Logid not found
+	    return null; 
 	}
-
-
-	/*public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-		
-	}*/
-	
-	//String database = "src/database/accounts.txt";
-
 }

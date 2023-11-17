@@ -214,7 +214,5 @@ public class NewLogController<Strings> implements Initializable{
 
         
     }
-
-	
     
 }
