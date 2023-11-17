@@ -198,7 +198,7 @@ public class NewLogController<Strings> implements Initializable{
         System.out.println("Story Points: " + storyPointsText);
         
         String logEntry = String.format(
-                "[Logid: %s, Logname:%s, Date:%s, Status:%s, Start Time:%s, End Time:%s, Lifecycle Step:%s, Project Name:%s, Category:%s, Story Points:%s]%n",
+                "Logid: %s, Logname:%s, Date:%s, Status:%s, Start Time:%s, End Time:%s, Lifecycle Step:%s, Project Name:%s, Category:%s, Story Points:%s%n",
                 generateHexId(), logNameText, dateText, statusText, startTimeText, endTimeText, lifeCycleStepText, projectNameText, categoryText, storyPointsText);
         
         try {

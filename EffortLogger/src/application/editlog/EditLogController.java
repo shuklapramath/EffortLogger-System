@@ -5,8 +5,11 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -39,10 +42,10 @@ public class EditLogController<Strings> implements Initializable{
     private ChoiceBox<String> categoryChoiceBox;
     
     @FXML 
-    private ChoiceBox<String> ProjectNameChoiceBox;
+    private ChoiceBox<String> projectNameChoiceBox;
     
     @FXML 
-    private ChoiceBox<String> LifeCycleChoiceBox;
+    private ChoiceBox<String> lifeCycleChoiceBox;
     
     
     
@@ -59,7 +62,63 @@ public class EditLogController<Strings> implements Initializable{
     	categoryChoiceBox.getItems().add((String) "Effort");
     	categoryChoiceBox.getItems().add((String) "Defect");
     	
+    	// Read project names and populate ProjectNameChoiceBox
+        List<String> projectNames = readProjectNamesFromFile();
+        projectNameChoiceBox.getItems().addAll(projectNames);
+
+        // Read lifecycle steps and populate LifeCycleChoiceBox
+        List<String> lifecycleSteps = readLifecycleStepsFromFile();
+        lifeCycleChoiceBox.getItems().addAll(lifecycleSteps);
     	
+    	
+    }
+    
+    private List<String> readProjectNamesFromFile() {
+        // Replace with your actual file path
+    	
+   
+        String filePath = "src/database/definitions.txt";
+        List<String> projectNames = new ArrayList<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (line.startsWith("Project Name:")) {
+                    // Extract project names from the line and add to the list
+                    String[] parts = line.split(":")[1].split(",");
+                    projectNames.addAll(Arrays.asList(parts));
+                    break; // Assuming there is only one line with project names
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return projectNames;
+    }
+
+    private List<String> readLifecycleStepsFromFile() {
+        // Replace with your actual file path
+        String filePath = "src/database/definitions.txt";
+    	
+        
+        List<String> lifecycleSteps = new ArrayList<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (line.startsWith("Lifecycle Step:")) {
+                    // Extract lifecycle steps from the line and add to the list
+                    String[] parts = line.split(":")[1].split(",");
+                    lifecycleSteps.addAll(Arrays.asList(parts));
+                    break; // Assuming there is only one line with lifecycle steps
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return lifecycleSteps;
     }
 
 	@FXML
@@ -80,8 +139,10 @@ public class EditLogController<Strings> implements Initializable{
                 String newStartTime = startTimeTextField.getText();
                 String newEndTime = endTimeTextField.getText();
                 String newCategory = categoryChoiceBox.getValue();
+                String newProjectName = projectNameChoiceBox.getValue();
+                String newLifeCycleStep = lifeCycleChoiceBox.getValue();
                 String newStoryPoints = storyPointsTextField.getText();
-                updateDatabase(lognameToEdit, newStatus, newDate, newStartTime, newEndTime, newCategory, newStoryPoints);
+                updateDatabase(lognameToEdit, newStatus, newDate, newStartTime, newEndTime, newCategory, newLifeCycleStep, newProjectName, newStoryPoints);
                 System.out.println("Database updated successfully.");
             } catch (IOException e) {
                 e.printStackTrace();
@@ -89,8 +150,10 @@ public class EditLogController<Strings> implements Initializable{
         });
     }
 
-	private void updateDatabase(String lognameToEdit, String newStatus, String newDate, String newStartTime, String newEndTime, String newCategory, String newStoryPoints) throws IOException {
-	    String filePath = "EffortLogger/src/database/logs.txt"; // Replace with your actual file path
+	private void updateDatabase(String lognameToEdit, String newStatus, String newDate, String newStartTime,
+	        String newEndTime, String newCategory, String newLifeCycleStep, String newProjectName, String newStoryPoints)
+	        throws IOException {
+	    String filePath = "src/database/logs.txt"; // Replace with your actual file path
 
 	    // Read the content of the file
 	    List<String> lines = new ArrayList<>();
@@ -104,13 +167,17 @@ public class EditLogController<Strings> implements Initializable{
 	    // Find and modify the desired entry
 	    for (int i = 0; i < lines.size(); i++) {
 	        String line = lines.get(i);
-	        if (line.contains("logname:" + lognameToEdit)) {
+	        if (line.contains("Logname:" + lognameToEdit)) {
 	            System.out.println("Found logname to edit: " + lognameToEdit);
 
+	            // Extract Logid from the line
+	            String logId = extractLogId(line);
+
 	            // Construct the updated line
-	            String updatedLine = "logname:" + lognameToEdit + ", Date:" + newDate + ", Status:" + newStatus +
-	                    ", Start Time:" + newStartTime + ", End Time:" + newEndTime +
-	                    ", Project Name:testname" + ", Category:" + newCategory + ", Story Points:" + newStoryPoints;
+	            String updatedLine = "Logid:" + logId + ", Logname:" + lognameToEdit + ", Date:" + newDate + ", Status:"
+	                    + newStatus + ", Start Time:" + newStartTime + ", End Time:" + newEndTime + ", Category:"
+	                    + newCategory + ", LifeCycle:" + newLifeCycleStep + ", ProjectName:" + newProjectName + ", "
+	                    + ",Story Points:" + newStoryPoints;
 
 	            // Replace the entire line with the updated line
 	            lines.set(i, updatedLine);
@@ -129,6 +196,18 @@ public class EditLogController<Strings> implements Initializable{
 	        }
 	    }
 	}
+
+	// Helper method to extract Logid from the line
+	private String extractLogId(String line) {
+	    String[] parts = line.split(",");
+	    for (String part : parts) {
+	        if (part.trim().startsWith("Logid:")) {
+	            return part.trim().substring(6); // Extract Logid value
+	        }
+	    }
+	    return null; // Logid not found
+	}
+
 
 	/*public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub

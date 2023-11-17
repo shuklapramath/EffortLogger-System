@@ -40,8 +40,8 @@
       <ChoiceBox fx:id="statusChoiceBox" layoutX="233.0" layoutY="370.0" prefHeight="35.0" prefWidth="194.0" />
       <TextField fx:id="startTimeTextField" layoutX="233.0" layoutY="430.0" prefHeight="35.0" prefWidth="194.0" promptText="hh:mm" />
       <TextField fx:id="endTimeTextField" layoutX="233.0" layoutY="490.0" prefHeight="35.0" prefWidth="194.0" promptText="hh:mm" />
-      <ChoiceBox layoutX="233.0" layoutY="550.0" prefHeight="35.0" prefWidth="194.0" />
-      <ChoiceBox layoutX="233.0" layoutY="610.0" prefHeight="35.0" prefWidth="194.0" />
+      <ChoiceBox fx:id="lifeCycleChoiceBox" layoutX="233.0" layoutY="550.0" prefHeight="35.0" prefWidth="194.0" />
+      <ChoiceBox fx:id="projectNameChoiceBox" layoutX="233.0" layoutY="610.0" prefHeight="35.0" prefWidth="194.0" />
       <ChoiceBox fx:id="categoryChoiceBox" layoutX="233.0" layoutY="670.0" prefHeight="35.0" prefWidth="194.0" />
       <Label layoutX="113.0" layoutY="436.0" text="Start Time">
          <font>
