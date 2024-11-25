@@ -1,1 +1,2 @@
 Project Name: test2,test
+Lifecycle Step: LifeCycle2,LifeCycle1

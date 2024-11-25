@@ -1,0 +1,4 @@
+[Logname:test1, Date:2023-11-03, Status:Completed, Start Time:5, End Time:7, Category:Defect, LifeCycle: test2, ProjectName: LifeCycle2, ,Story Points:3]
+logname:test2, Date:2023-11-26, Status:Completed, Start Time:9, End Time:1, Category:Effort, LifeCycle:test, ProjectName: LifeCycle2, ,Story Points:6
+Logid: EB5C04, Logname:test3, Date:2023-11-04, Status:In Progress, Start Time:1.00, End Time:6.00, Category:Effort, LifeCycle: LifeCycle2, ProjectName:test, ,Story Points:4
+Logid: 9FFCDD, Logname:, Date:No Date Selected, Status:null, Start Time:, End Time:, Lifecycle Step:null, Project Name:null, Category:null, Story Points:
